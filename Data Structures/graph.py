@@ -26,6 +26,12 @@ class Graph:
                 return True
         return False
 
+    def neighbors_of(self, vertex):
+        neighbors = []
+        for edge in vertex.edges:
+            neighbors.append( edge.other_end(vertex) )
+        return neighbors
+
 
 class Edge:
     """A graph edge"""
