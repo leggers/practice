@@ -4,7 +4,7 @@
 # Implementation of a graph
 
 class Graph:
-    """Graph data structure"""
+    """Graph data structure. The graph is structured as an indidence list."""
     def __init__(self, graphString = ''):
         self.vertices = []
         self.edges = []
