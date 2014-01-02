@@ -25,13 +25,13 @@ class Graph:
     def disconnect_vertices(self, v1, v2):
         """Removes the edge connecting the vertices. Returns the edge's
         value if one was assigned."""
-        for edge in self.edges:
-            if edge.connected_to(v1) and edge.connected_to(v2):
-                value = edge.value
-                if value == None:
-                    value = True
-                edge.remove()
-                return value
+        edge = self.get_edge_between(v1, v2)
+        if edge:
+            value = edge.value
+            if value == None:
+                value = True
+            edge.remove()
+            return value
         return False
 
     def neighbors_of(self, vertex):
@@ -48,8 +48,26 @@ class Graph:
                 return True
         return False
 
-    def function():
-        pass
+    def get_edge_value(self, v1, v2):
+        edge = self.get_edge_between(v1, v2)
+        if edge:
+            return edge.value
+        raise "No edge exists between passed nodes!"
+
+    def set_edge_value(self, v1, v2, value):
+        """Set the value of the edge between two vertices."""
+        edge = self.get_edge_between(v1, v2)
+        if edge:
+            edge.value = value
+        else:
+            raise "No edge exists between passed nodes!"
+
+    def get_edge_between(self, v1, v2):
+        """Set the value of the edge between two vertices."""
+        for edge in self.edges:
+            if edge.connected_to(v1) and edge.connected_to(v2):
+                return edge
+        return None
 
 
 class Edge:
