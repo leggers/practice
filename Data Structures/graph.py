@@ -32,6 +32,12 @@ class Graph:
             neighbors.append( edge.other_end(vertex) )
         return neighbors
 
+    def are_adjacent(self, v1, v2):
+        for edge in v1.edges:
+            if edge.connected_to(v2):
+                return True
+        return False
+
 
 class Edge:
     """A graph edge"""
