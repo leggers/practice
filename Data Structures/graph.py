@@ -10,42 +10,56 @@ class Graph:
         self.edges = []
 
     def add_vertex(self, value):
+        """Adds a vertex with a given value"""
         vertex = Vertex(value)
         self.vertices.append(vertex)
         return vertex
 
-    def connect_vertices(self, v1, v2):
-        edge = Edge(v1, v2)
+    def connect_vertices(self, v1, v2, value = None):
+        """Adds an edge between two passed vertices. Can assign a value to
+        the edge as an optional parameter."""
+        edge = Edge(v1, v2, value)
         self.edges.append(edge)
         return edge
 
     def disconnect_vertices(self, v1, v2):
+        """Removes the edge connecting the vertices. Returns the edge's
+        value if one was assigned."""
         for edge in self.edges:
             if edge.connected_to(v1) and edge.connected_to(v2):
+                value = edge.value
+                if value == None:
+                    value = True
                 edge.remove()
-                return True
+                return value
         return False
 
     def neighbors_of(self, vertex):
+        """Get all neighbors of a vertex."""
         neighbors = []
         for edge in vertex.edges:
             neighbors.append( edge.other_end(vertex) )
         return neighbors
 
     def are_adjacent(self, v1, v2):
+        """Boolean whether or not two vertices have an edge between them."""
         for edge in v1.edges:
             if edge.connected_to(v2):
                 return True
         return False
 
+    def function():
+        pass
+
 
 class Edge:
     """A graph edge"""
-    def __init__(self, v1, v2):
+    def __init__(self, v1, v2, value):
         v1.edges.append(self)
         v2.edges.append(self)
         self.v1 = v1
         self.v2 = v2
+        self.value = value
 
     def other_end(self, v):
         if v == self.v1:
