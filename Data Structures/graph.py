@@ -65,8 +65,8 @@ class Edge:
 
 class Vertex:
     """A graph vertex"""
-    def __init__(self, name, weight = 1):
-        self.name = name
+    def __init__(self, value, weight = 1):
+        self.value = value
         self.edges = []
         self.weight = weight
 
