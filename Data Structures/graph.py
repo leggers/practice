@@ -15,7 +15,7 @@ class Graph:
         self.vertices.append(vertex)
         return vertex
 
-    def connect_vertices(self, v1, v2, value = None):
+    def connect_vertices(self, v1, v2, value = 1):
         """Adds an edge between two passed vertices. Can assign a value to
         the edge as an optional parameter."""
         edge = Edge(v1, v2, value)
@@ -97,10 +97,9 @@ class Edge:
 
 class Vertex:
     """A graph vertex"""
-    def __init__(self, value, weight = 1):
+    def __init__(self, value):
         self.value = value
         self.edges = []
-        self.weight = weight
 
     def add_edge(self, edge):
         self.edges.append(edge)
