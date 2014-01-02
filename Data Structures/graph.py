@@ -49,29 +49,22 @@ class Graph:
         return False
 
     def get_edge_value(self, v1, v2):
-        edge = self.get_edge_between(v1, v2)
-        if edge:
-            return edge.value
-        raise "No edge exists between passed nodes!"
+        return self.get_edge_between(v1, v2).value
 
     def set_edge_value(self, v1, v2, value):
         """Set the value of the edge between two vertices."""
-        edge = self.get_edge_between(v1, v2)
-        if edge:
-            edge.value = value
-        else:
-            raise "No edge exists between passed nodes!"
+        self.get_edge_between(v1, v2).value = value
 
     def get_edge_between(self, v1, v2):
         """Set the value of the edge between two vertices."""
         for edge in self.edges:
             if edge.connected_to(v1) and edge.connected_to(v2):
                 return edge
-        return None
+        raise "No edge exists between passed nodes."
 
 
 class Edge:
-    """A graph edge"""
+    """A graph edge. Stores its incident vertices and possibly a value."""
     def __init__(self, v1, v2, value):
         v1.edges.append(self)
         v2.edges.append(self)
@@ -80,15 +73,21 @@ class Edge:
         self.value = value
 
     def other_end(self, v):
+        """Gets node on the other end of the """
         if v == self.v1:
             return self.v2
-        else:
+        elif v == self.v2:
             return self.v1
+        else:
+            raise "Edge not connected to passed node."
 
     def connected_to(self, vertex):
+        """Returns whether or not passed vertex is connected to edge."""
         return vertex == self.v1 or vertex == self.v2
 
     def remove(self):
+        """Remove edge from the graph. Removes reference to edge from
+        connected vertices and removes references to vertices from self."""
         self.v1.remove_edge(self)
         self.v1 = None
         self.v2.remove_edge(self)
@@ -102,11 +101,12 @@ class Vertex:
         self.edges = []
 
     def add_edge(self, edge):
+        """Adds edge to vertex's edge list."""
         self.edges.append(edge)
 
     def remove_edge(self, edge):
+        """Removes edge from vertex's edge list."""
         try:
             self.edges.remove(edge)
-            return True
         except ValueError:
-            return False
+            raise "Vertex not connected to passed edge."
