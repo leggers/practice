@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # Author: Lucas Eggers
 
-# Implementation of a graph
+# Inicidence list implementation of a graph data structure.
 
 class Graph:
     """Graph data structure. The graph is structured as an indidence list."""
