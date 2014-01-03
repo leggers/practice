@@ -9,6 +9,13 @@ class Graph:
         self.vertices = []
         self.edges = []
 
+    def to_string(self):
+        for vertex in self.vertices:
+            to_print = str(vertex.value) + ': '
+            for neighbor in self.neighbors_of(vertex):
+                to_print += str(neighbor.value) + ', '
+            print to_print
+
     def add_vertex(self, value):
         """Adds a vertex with a given value"""
         vertex = Vertex(value)
