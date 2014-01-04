@@ -11,7 +11,8 @@ class Generator:
 
     def graph_nb(self, nodes, branching):
         """Generates a random graph with a number of edges per node.
-        Does not allow nodes to connect to each other."""
+        Does not allow nodes to connect to each other. Edges have
+        default weight of one."""
         g = Graph()
         for i in range(0, nodes):
             g.add_vertex(i)
@@ -23,3 +24,11 @@ class Generator:
                     neighbor = random.choice( g.vertices )
                 g.connect_vertices(vertex, neighbor)
         return g
+
+    def graph_nb_weighted(self, nodes, branching, max_weight):
+        """Creates a random graph with a number of edges per node.
+        Does not allow nodes to connect to each other. Edges have
+        integer weight between 1 and max_weight."""
+        g = self.graph_nb(nodes, branching)
+        for edge in g.edges:
+            edge.weight = random.choice(range(1, max_weight))
