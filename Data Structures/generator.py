@@ -14,7 +14,7 @@ class Generator:
         Does not allow nodes to connect to each other. Edges have
         default weight of one."""
         g = Graph()
-        name_ord = ord('a' - 1)
+        name_ord = ord('a') - 1
         for i in range(0, nodes):
             name_ord += 1
             g.add_vertex(chr(name_ord))
