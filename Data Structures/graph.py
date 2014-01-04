@@ -13,6 +13,7 @@ class Graph:
         for vertex in self.vertices:
             to_print = str(vertex.value) + ': '
             for neighbor in self.neighbors_of(vertex):
+                to_print += str( self.get_edge_weight(vertex, neighbor) ) + ' to '
                 to_print += str(neighbor.value) + ', '
             print to_print
 
@@ -22,23 +23,21 @@ class Graph:
         self.vertices.append(vertex)
         return vertex
 
-    def connect_vertices(self, v1, v2, value = 1):
-        """Adds an edge between two passed vertices. Can assign a value to
+    def connect_vertices(self, v1, v2, weight = 1):
+        """Adds an edge between two passed vertices. Can assign a weight to
         the edge as an optional parameter."""
-        edge = Edge(v1, v2, value)
+        edge = Edge(v1, v2, weight)
         self.edges.append(edge)
         return edge
 
     def disconnect_vertices(self, v1, v2):
         """Removes the edge connecting the vertices. Returns the edge's
-        value if one was assigned."""
+        weight (default of 1)."""
         edge = self.get_edge_between(v1, v2)
         if edge:
-            value = edge.value
-            if value == None:
-                value = True
+            weight = edge.weight
             edge.remove()
-            return value
+            return weight
         return False
 
     def neighbors_of(self, vertex):
@@ -55,15 +54,15 @@ class Graph:
                 return True
         return False
 
-    def get_edge_value(self, v1, v2):
-        return self.get_edge_between(v1, v2).value
+    def get_edge_weight(self, v1, v2):
+        return self.get_edge_between(v1, v2).weight
 
-    def set_edge_value(self, v1, v2, value):
-        """Set the value of the edge between two vertices."""
-        self.get_edge_between(v1, v2).value = value
+    def set_edge_weight(self, v1, v2, weight):
+        """Set the weight of the edge between two vertices."""
+        self.get_edge_between(v1, v2).weight = weight
 
     def get_edge_between(self, v1, v2):
-        """Set the value of the edge between two vertices."""
+        """Get the edge connecting two vertices."""
         for edge in self.edges:
             if edge.connected_to(v1) and edge.connected_to(v2):
                 return edge

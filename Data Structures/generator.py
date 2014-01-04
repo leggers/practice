@@ -34,3 +34,4 @@ class Generator:
         g = self.graph_nb(nodes, branching)
         for edge in g.edges:
             edge.weight = random.choice(range(1, max_weight))
+        return g
