@@ -9,8 +9,8 @@ class Dijkstra():
         self.graph = graph
 
     def solve(self, graph = None):
-        """Returns an array of graph, edge, graph, edge... that
-        makes the path from start node to end."""
+        """Returns an array of vertex, edge, vertex, edge, vertex, etc.
+        that makes the path from start node to end."""
         pass
 
     def solution_string(self):
