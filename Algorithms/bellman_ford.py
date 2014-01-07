@@ -12,7 +12,7 @@ class Bellman_Ford(GenericSolver):
     def __init__(self, graph = None):
         super(Bellman_Ford, self).__init__(graph)
 
-    def solve(self, initial, graph):
+    def solve(self, initial, graph = None):
         graph = self.setup(graph, initial)
         for i in range(0, len(graph.vertices)):
             for edge in graph.edges:
