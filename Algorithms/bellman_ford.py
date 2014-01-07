@@ -24,7 +24,7 @@ class Bellman_Ford(GenericSolver):
         for edge in graph.edges:
             distance_to_vertex = edge.v1.distance + edge.weight
             if distance_to_vertex < edge.v2.distance:
-                railse "Graph contains a negative-weight cycle"
+                raise "Graph contains a negative-weight cycle"
 
     def setup(self, graph, initial):
         for vertex in graph.vertices:
