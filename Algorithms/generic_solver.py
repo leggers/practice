@@ -22,5 +22,5 @@ class GenericSolver(object):
         if not graph:
             graph = self.graph
             if not graph:
-                raise "No graph provided in constructor or method call"
+                raise Exception("No graph provided in constructor or method call")
         return graph

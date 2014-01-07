@@ -66,7 +66,7 @@ class Graph:
         for edge in self.edges:
             if edge.connected_to(v1) and edge.connected_to(v2):
                 return edge
-        raise "No edge exists between passed nodes."
+        raise Exception("No edge exists between passed nodes.")
 
 
 class Edge:
@@ -85,7 +85,7 @@ class Edge:
         elif v == self.v2:
             return self.v1
         else:
-            raise "Edge not connected to passed node."
+            raise Exception("Edge not connected to passed node.")
 
     def connected_to(self, vertex):
         """Returns whether or not passed vertex is connected to edge."""
@@ -115,4 +115,4 @@ class Vertex:
         try:
             self.edges.remove(edge)
         except ValueError:
-            raise "Vertex not connected to passed edge."
+            raise Exception("Vertex not connected to passed edge.")
