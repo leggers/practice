@@ -3,10 +3,12 @@
 
 # Class that implements Dijkstra's graph search algorithm
 
-class Dijkstra():
+from generic_solver import *
+
+class Dijkstra(GenericSolver):
     """Class that implements Dijstra's graph serach algorithm"""
     def __init__(self, graph = None):
-        self.graph = graph
+        super(Dijkstra, self).__init__(graph)
 
     def solve(self, initial, graph = None):
         """Returns a graph with previous pointers and distances
