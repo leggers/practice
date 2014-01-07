@@ -42,7 +42,12 @@ class Bellman_Ford(GenericSolver):
 
     def get_v1(self, edge):
         v1 = edge.v1
+        # starting node has no previous and distance is 0
         if v1.previous == None and v1.distance == 0:
             return v1
+        # some path exists to this node
+        elif v1.previous:
+            return v1
+        # otherwise, return the other one
         else:
             return edge.v2
