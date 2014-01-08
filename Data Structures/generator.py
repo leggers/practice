@@ -46,6 +46,15 @@ class Generator:
                     neighbor = random.choice( g.vertices )
                 g.connect_vertices(curr, neighbor)
             curr = random.choice( g.neighbors_of(curr) )
+        return g
+
+    def graph_nbd_weighted(self, nodes, branching, min_weight, max_weight):
+        """Generates a random directed graph with edge weights between the
+        passed values."""
+        g = self.graph_nbd(nodes, branching)
+        for edge in g.edges:
+            edge.weight = random.choice(range(min_weight, max_weight))
+        return g
 
     def setup_graph(self, nodes):
         """Creates a graph with the passed number of nodes and no edges."""
