@@ -10,9 +10,9 @@ class Generator:
     """Class that generates various data structures."""
 
     def graph_nb(self, nodes, branching):
-        """Generates a random graph with a number of edges per node.
-        Does not allow nodes to connect to each other. Edges have
-        default weight of one."""
+        """Generates a random undirected graph with a number of edges 
+        per node. Does not allow nodes to connect to each other more 
+        than once. Edges have default weight of one."""
         g = self.setup_graph(nodes)
         for vertex in g.vertices:
             connections = len(vertex.edges)
@@ -33,6 +33,9 @@ class Generator:
         return g
 
     def graph_nbd(self, nodes, branching):
+        """Creates a directed graph with passed number of edges per node.
+        For each edge, v1 denotes source vertex and v2 denotes destination.
+        Edges have default weight of one."""
         g = self.setup_graph(nodes)
         curr = g.vertices[0]
         while not self.fully_connected(g, branching):
