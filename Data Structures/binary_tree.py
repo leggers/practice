@@ -30,6 +30,43 @@ class BinaryTree(object):
             parent.right_child = new_node
             new_node.right_child = child
 
+    def remove(self, node):
+        parent = node.parent
+        node.parent = None
+
+        if node.is_left_child_of(parent):
+            parent.left_child = None
+
+            if node.left_child:
+                parent.left_child = node.left_child
+                node.left_child.parent = parent
+                # if node we're removing has two chilren
+                if node.right_child:
+                    node.left_child.right_child = node.right_child
+                    node.right_child.parent = node.left_child
+
+            elif node.right_child:
+                parent.left_child = node.right_child
+                node.right_child.parent = parent
+
+        elif node.is_right_child_of(parent):
+            parent.right_child = None
+
+            if node.right_child:
+                parent.right_child = node.right_child
+                node.right_child.parent = parent
+                if node.left_child:
+                    node.right_child.left_child = node.left_child
+                    node.left_child.parent = node.left_child
+
+            elif node.left_child:
+                parent.right_child = node.left_child
+                node.left_child.parent = parent
+
+        else:
+            raise Exception("Node is not a child of its supposed parent. Uh oh")
+
+
 
 
 class TreeNode(object):
@@ -48,10 +85,10 @@ class TreeNode(object):
         return node == self.left_child or node == self.right_child
 
     def is_left_child_of(self, node):
-        return node == self.left_child
+        return node.left_child == self
 
     def is_right_child_of(self, node):
-        return node == self.right_child
+        return node.right_child == self
 
     def add_child(self, node):
         if self.left_child == None:
@@ -60,3 +97,14 @@ class TreeNode(object):
             self.right_child = node
         else:
             raise Exception("Adding a child to a node with two children")
+
+    def is_leaf(self):
+        return self.left_child == None and self.right_child == None
+
+    def number_of_children(self):
+        number = 0
+        if self.left_child:
+            number += 1
+        if self.right_child:
+            number += 1
+        return number
