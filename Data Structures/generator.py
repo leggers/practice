@@ -42,7 +42,7 @@ class Generator:
             connections = len(curr.edges)
             for i in range(connections, branching):
                 neighbor = random.choice( g.vertices )
-                while neighbor == vertex or g.are_adjacent(vertex, neighbor):
+                while neighbor == curr or g.are_adjacent(curr, neighbor):
                     neighbor = random.choice( g.vertices )
                 g.connect_vertices(curr, neighbor)
             curr = random.choice( g.neighbors_of(curr) )
