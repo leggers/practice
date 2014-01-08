@@ -13,11 +13,7 @@ class Generator:
         """Generates a random graph with a number of edges per node.
         Does not allow nodes to connect to each other. Edges have
         default weight of one."""
-        g = Graph()
-        name_ord = ord('a') - 1
-        for i in range(0, nodes):
-            name_ord += 1
-            g.add_vertex(chr(name_ord))
+        g = self.setup_graph(nodes)
         for vertex in g.vertices:
             connections = len(vertex.edges)
             for j in range(connections, branching):
@@ -35,3 +31,30 @@ class Generator:
         for edge in g.edges:
             edge.weight = random.choice(range(min_weight, max_weight))
         return g
+
+    def graph_nbd(self, nodes, branching):
+        g = self.setup_graph(nodes)
+        curr = g.vertices[0]
+        while not self.fully_connected(g, branching):
+            connections = len(curr.edges)
+            for i in range(connections, branching):
+                neighbor = random.choice( g.vertices )
+                while neighbor == vertex or g.are_adjacent(vertex, neighbor):
+                    neighbor = random.choice( g.vertices )
+                g.connect_vertices(curr, neighbor)
+            curr = random.choice( g.neighbors_of(curr) )
+
+    def setup_graph(self, nodes):
+        """Creates a graph with the passed number of nodes and no edges."""
+        g = Graph()
+        name_ord = ord('a') - 1
+        for i in range(0, nodes):
+            name_ord += 1
+            g.add_vertex(chr(name_ord))
+        return g
+
+    def fully_connected(self, graph, branching):
+        for vertex in graph.vertices:
+            if len(vertex.edges) < 2:
+                return False
+        return True
