@@ -37,6 +37,15 @@ class SinglyLinkedList(AbstractList):
         to_remove.next = None
         return to_remove.value
 
+    def to_string(self):
+        node = self.first
+        to_return = str(node.value)
+        while node.next:
+            to_return += " -> "
+            node = node.next
+            to_return += str(node.value)
+        return to_return
+
 
 class SinglyLinkedNode(object):
     """Singly-linked list node"""
