@@ -16,28 +16,33 @@ class SinglyLinkedList(AbstractList):
         super(SinglyLinkedList, self).__init__()
 
     def insert_at_beginning(self, value):
+        """Inserts new node at beginning of list"""
         new_node = SinglyLinkedNode(value, self.first)
         self.first = new_node
         return new_node
 
     def insert_after(self, node, value):
+        """Inserts node after passed node"""
         new_node = SinglyLinkedNode(value, node.next)
         node.next = new_node
         return new_node
 
     def remove_beginning(self):
+        """Removes first node of list"""
         old_beginning = self.first
         self.first = old_beginning.next
         old_beginning.next = None
         return old_beginning.value
 
     def remove_after(self, node):
+        """Removes node after passed node"""
         to_remove = node.next
         node.next = to_remove.next
         to_remove.next = None
         return to_remove.value
 
     def to_string(self):
+        """Returns string representation of list"""
         node = self.first
         to_return = "Empty List"
         if node:
@@ -65,6 +70,7 @@ class DoublyLinkedList(AbstractList):
         self.last = None
 
     def insert_at_beginning(self, value):
+        """Inserts node at beginning of list"""
         if self.first == None:
             new_node = DoublyLinkedNode(value, self.first)
             self.first = new_node
@@ -74,6 +80,7 @@ class DoublyLinkedList(AbstractList):
         return new_node
 
     def insert_at_end(self, value):
+        """Inserts node at end of list"""
         if self.last == None:
             new_node = self.insert_at_beginning(value)
         else:
@@ -81,6 +88,7 @@ class DoublyLinkedList(AbstractList):
         return new_node
 
     def insert_after(self, node, value):
+        """Inserts node after passed node"""
         new_node = DoublyLinkedNode(value, node.next, node)
         if node.next == None:
             self.last = new_node
@@ -90,6 +98,7 @@ class DoublyLinkedList(AbstractList):
         return new_node
 
     def insert_before(self, node, value):
+        """Inserts node before passed node"""
         new_node = DoublyLinkedNode(value, node, node.previous)
         if node.previous == None:
             self.first = new_node
@@ -99,6 +108,7 @@ class DoublyLinkedList(AbstractList):
         return new_node
 
     def remove(self, node):
+        """Removes passed node"""
         # first node of list
         if node.previous == None:
             self.first = node.next
@@ -114,6 +124,7 @@ class DoublyLinkedList(AbstractList):
         return node.value
 
     def to_string(self):
+        """Returns string representation of list"""
         node = self.first
         to_return = "Empty List"
         if node:
@@ -124,7 +135,6 @@ class DoublyLinkedList(AbstractList):
                 to_return += str(node.value)
             to_return += " <-> " + str(node.next)
         return to_return
-
 
 class DoublyLinkedNode(object):
     """Doubly-linked list node"""
