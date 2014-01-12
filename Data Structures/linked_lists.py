@@ -90,7 +90,20 @@ class DoublyLinkedList(AbstractList):
         node.previous = new_node
         return new_node
 
+    def remove(self, node):
+        # first node of list
+        if node.previous == None:
+            self.first = node.next
+        else:
+            node.previous.next = node.next
 
+        # last node of list
+        if node.next == None:
+            self.last = node.previous
+        else:
+            node.next.previous = node.previous
+
+        return node.value
 
 
 class DoublyLinkedNode(object):
