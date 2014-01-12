@@ -105,6 +105,16 @@ class DoublyLinkedList(AbstractList):
 
         return node.value
 
+    def to_string(self):
+        node = self.first
+        to_return = str(node.previous) + " <-> " + str(node.value)
+        while node.next:
+            to_return += " <-> "
+            node = node.next
+            to_return += str(node.value)
+        to_return += " <-> " + str(node.next)
+        return to_return
+
 
 class DoublyLinkedNode(object):
     """Doubly-linked list node"""
