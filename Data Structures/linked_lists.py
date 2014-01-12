@@ -60,7 +60,38 @@ class DoublyLinkedList(AbstractList):
     """Doubly linked list data structure"""
     def __init__(self):
         super(DoublyLinkedList, self).__init__()
-        
+        self.last = None
+
+    def insert_at_beginning(self, value):
+        if self.first == None:
+            new_node = DoublyLinkedNode(value, old_first)
+            self.first = new_node
+            self.last = new_node
+        else:
+            new_node = self.insert_before(self.first, value)
+        return new_node
+
+    def insert_at_end(self, value):
+        if self.last == None:
+            new_node = self.insert_at_beginning(value)
+        else:
+            new_node = self.insert_after(self.last, value)
+        return new_node
+
+    def insert_after(self, node, value):
+        new_node = DoublyLinkedNode(value, node.next, node)
+        node.next.previous = new_node
+        node.next = new_node
+        return new_node
+
+    def insert_before(self, node, value):
+        new_node = DoublyLinkedNode(value, node, node.previous)
+        node.previous.next = new_node
+        node.previous = new_node
+        return new_node
+
+
+
 
 class DoublyLinkedNode(object):
     """Doubly-linked list node"""
