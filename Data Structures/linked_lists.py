@@ -39,11 +39,13 @@ class SinglyLinkedList(AbstractList):
 
     def to_string(self):
         node = self.first
-        to_return = str(node.value)
-        while node.next:
-            to_return += " -> "
-            node = node.next
-            to_return += str(node.value)
+        to_return = "Empty List"
+        if node:
+            to_return = str(node.value)
+            while node.next:
+                to_return += " -> "
+                node = node.next
+                to_return += str(node.value)
         return to_return
 
 
@@ -64,7 +66,7 @@ class DoublyLinkedList(AbstractList):
 
     def insert_at_beginning(self, value):
         if self.first == None:
-            new_node = DoublyLinkedNode(value, old_first)
+            new_node = DoublyLinkedNode(value, self.first)
             self.first = new_node
             self.last = new_node
         else:
@@ -80,13 +82,19 @@ class DoublyLinkedList(AbstractList):
 
     def insert_after(self, node, value):
         new_node = DoublyLinkedNode(value, node.next, node)
-        node.next.previous = new_node
+        if node.next == None:
+            self.last = new_node
+        else:
+            node.next.previous = new_node
         node.next = new_node
         return new_node
 
     def insert_before(self, node, value):
         new_node = DoublyLinkedNode(value, node, node.previous)
-        node.previous.next = new_node
+        if node.previous == None:
+            self.first = new_node
+        else:
+            node.previous.next = new_node
         node.previous = new_node
         return new_node
 
@@ -107,12 +115,14 @@ class DoublyLinkedList(AbstractList):
 
     def to_string(self):
         node = self.first
-        to_return = str(node.previous) + " <-> " + str(node.value)
-        while node.next:
-            to_return += " <-> "
-            node = node.next
-            to_return += str(node.value)
-        to_return += " <-> " + str(node.next)
+        to_return = "Empty List"
+        if node:
+            to_return = str(node.previous) + " <-> " + str(node.value)
+            while node.next:
+                to_return += " <-> "
+                node = node.next
+                to_return += str(node.value)
+            to_return += " <-> " + str(node.next)
         return to_return
 
 
