@@ -8,7 +8,17 @@ Implemented in Python 'cause that's how I roll sometimes.
 To Implement
 ---
 
-Dijkstra's
+Everything in "Data Structures and Algorithms" by Aho, Hopcroft and Ullman
+
+Data Structures
+___
+
+Binary Tree
+
+n-ary tree
+
+Algorithms
+___
 
 BFS
 
@@ -17,8 +27,6 @@ DFS
 IDDFS
 
 A*
-
-Binary Tree data structure
 
 Tree Searches
 
@@ -32,3 +40,5 @@ Implemented
 ---
 
 Graph data structure
+
+Dijkstra's
